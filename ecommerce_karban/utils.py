@@ -250,8 +250,8 @@ def sync_new_orders(client: UnicommerceAPIClient = None, force=False):
 		try:
 			sales_order = create_order(order, client=client)
 
-			if settings.only_sync_completed_orders:
-				_create_sales_invoices(order, sales_order, client)
+			# if settings.only_sync_completed_orders:
+			# 	_create_sales_invoices(order, sales_order, client)
 		except Exception as e:
 			create_unicommerce_log(
 				method="ecommerce_integrations.unicommerce.order.sync_new_orders",
@@ -360,7 +360,7 @@ def _create_order(order: UnicommerceOrder, customer) -> None:
 		so.append("taxes", tax)
 	so.save()
 
-	so.submit()
+	# so.submit()
 	if is_cancelled:
 		so.cancel()
 
